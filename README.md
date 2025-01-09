@@ -16,27 +16,27 @@ go mod tidy
 
 
 ## About
-This is [GOTV+](https://developer.valvesoftware.com/wiki/Counter-Strike:_Global_Offensive_Broadcast) broadcast server interface for Go(Fiber and Gin).  
+This is [CSTV+](https://developer.valvesoftware.com/wiki/Counter-Strike:_Global_Offensive_Broadcast) broadcast server interface for Go(Fiber and Gin).  
   
-GOTV+ is an extension of GOTV where you use HTTP(S) to distribute instead of connecting to a regular GOTV. This makes it easy to serve many more clients around the world with high quality GOTV as you can distribute the content with CDN's.  
-Using `tv_broadcast` cvars you will enable GOTV+ on your CS:GO Server which will send fragmented data to the GOTV+ ingest (this application) which then serves them to clients which connects to it. The viewer will then watch the feed the same way you would when connecting directly to a GOTV instance.  
+CSTV+ is an extension of CSTV where you use HTTP(S) to distribute instead of connecting to a regular CSTV. This makes it easy to serve many more clients around the world with high quality CSTV as you can distribute the content with CDN's.  
+Using `tv_broadcast` cvars you will enable CSTV+ on your CS:GO Server which will send fragmented data to the CSTV+ ingest (this application) which then serves them to clients which connects to it. The viewer will then watch the feed the same way you would when connecting directly to a CSTV instance.  
   
 ## Usage
-- Launch GOTV+ Server(Fiber example)  
+- Launch CSTV+ Server(Fiber example)  
 Directly using Go: `go run ./examples/inmemory/cmd/main.go -port 8080 -auth gopher`  
-Using precompiled binary: `./gotv_plus -port :8080 -auth gopher`  
+Using precompiled binary: `./cstv_plus -port :8080 -auth gopher`  
 
-- Enable GOTV broadcast in CS:GO Server by adding this to server.cfg  
+- Enable CSTV broadcast in CS:GO Server by adding this to server.cfg  
 `MATCH_ID` can be what ever you want!  
 ```
 tv_enable 1
-tv_broadcast_url "http://<IP-ADDRESS>:8080/gotv"
+tv_broadcast_url "http://<IP-ADDRESS>:8080/cstv"
 tv_broadcast_origin_auth "gopher"
 tv_broadcast 1
 ```
 
-- Connect to GOTV+ from CS:GO Client  
-In console: `playcast "http://<IP-ADDRESS>:8080/gotv/MATCH_ID"`  
+- Connect to CSTV+ from CS:GO Client  
+In console: `playcast "http://<IP-ADDRESS>:8080/cstv/MATCH_ID"`  
 
 ### Tips
 - You should configure `tv_broadcast_...` cvars **before** enable broadcast (`tv_broadcast 1`).  
@@ -55,23 +55,23 @@ There are several hidden options that are not documented. I haven't covered all 
 - "B" Option / Skips dem_stop control frame(?)
 
 ## Example with Public CDN
-In this example we run the application with user `gotv`, and then use NGINX to proxy TCP/80 (HTTP) and TCP/443 (HTTPS) traffic to the application. 
+In this example we run the application with user `cstv`, and then use NGINX to proxy TCP/80 (HTTP) and TCP/443 (HTTPS) traffic to the application. 
 We advice that you limit who can send POST requests (CS:GO servers external/internal IP address) directly to the service with local firewall (iptables, nftables etc), this is the reason why we limit in NGINX all requests to only GET. 
 
 We use two page rules on Cloudflare. We bypass Cache for all requests to /sync as we want that to be served directly from the application, and then cache everything on rest of the URL's. 
 
 ```
-gotv.example.com/*/sync
+cstv.example.com/*/sync
 Cache Level: Bypass
 
-gotv.example.com/*
+cstv.example.com/*
 Cache Level: Cache Everything
 ```
 
 nginx config
 ```
 upstream ingest {
-        server <IP-ADDRESS>:8080; # Address to the gotv-plus-go application.
+        server <IP-ADDRESS>:8080; # Address to the cstv-go application.
 }
 
 server {
@@ -103,7 +103,7 @@ server {
 	ssl_certificate /etc/ssl/cloudflare/cloudflare-cert.pem;
 	ssl_certificate_key /etc/ssl/cloudflare/cloudflare-key.key;
 
-	server_name gotv.example.com;
+	server_name cstv.example.com;
 
 	# Never cache /sync (required for Google CDN and others where you cant configure excluded URL's)
 	location ~* \/sync$ {
@@ -124,7 +124,7 @@ server {
 simple systemd service
 ```
 [Unit]
-Description=GOTV+ service
+Description=CSTV+ service
 After=network.target
 StartLimitIntervalSec=0
 
@@ -132,9 +132,9 @@ StartLimitIntervalSec=0
 Type=simple
 Restart=always
 RestartSec=1
-User=gotv
-WorkingDirectory=/path/to/gotv # Required as the application needs template
-ExecStart=/path/to/gotv_plus -addr <IP-ADDRESS>:8080 -auth gopher
+User=cstv
+WorkingDirectory=/path/to/cstv # Required as the application needs template
+ExecStart=/path/to/cstv_go -addr <IP-ADDRESS>:8080 -auth gopher
 
 [Install]
 WantedBy=multi-user.target
