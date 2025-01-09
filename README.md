@@ -1,7 +1,7 @@
-# GOTV-Plus (Refactored)
+# CSTV-Go (Refactored)
 
 ## Overview
-GOTV-Plus is a WebSocket-based server using Fiber for handling real-time messaging.
+CSTV-Go is a WebSocket-based server using Fiber for handling real-time messaging.
 
 ## Features
 - WebSocket support with client registration
@@ -11,5 +11,5 @@ GOTV-Plus is a WebSocket-based server using Fiber for handling real-time messagi
 ## Installation
 ```sh
 git clone https://github.com/oldmagic/cstv-go.git
-cd gotv-plus-go
+cd cstv-go
 go mod tidy

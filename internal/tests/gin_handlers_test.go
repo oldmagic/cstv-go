@@ -9,7 +9,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/FlowingSPDG/gotv-plus-go/gotv"
+	"github.com/oldmagic/cstv-go/gotv"
 	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/assert"
 )

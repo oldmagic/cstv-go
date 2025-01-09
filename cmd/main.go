@@ -4,8 +4,8 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/FlowingSPDG/gotv-plus-go/pkg/config"
-	"github.com/FlowingSPDG/gotv-plus-go/pkg/logger"
+	"github.com/oldmagic/cstv-go/pkg/config"
+	"github.com/oldmagic/cstv-go/pkg/logger"
 	"github.com/gofiber/fiber/v2"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"

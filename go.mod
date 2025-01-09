@@ -1,4 +1,4 @@
-module github.com/FlowingSPDG/gotv-plus-go
+module github.com/oldmagic/cstv-go
 
 go 1.20
 

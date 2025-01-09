@@ -3,7 +3,7 @@ version: "3.8"
 services:
   gotv:
     build: .
-    container_name: gotv-plus-go
+    container_name: cstv-go
     ports:
       - "8080:8080"
     environment:

@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/FlowingSPDG/gotv-plus-go/util"
+	"github.com/oldmagic/cstv-go/util"
 	"github.com/stretchr/testify/assert"
 )
 
