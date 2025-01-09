@@ -61,7 +61,11 @@ func main() {
 	http.Handle("/metrics", promhttp.Handler())
 
 	go func() {
-		log.Fatal(http.ListenAndServe(":9091", nil))
+		port := os.Getenv("PORT")
+		if port == "" {
+			port = "8080" // Default to 8080 if .env is missing
+		}
+		log.Fatal(http.ListenAndServe(":"+port, nil))
 	}()
 
 	// Start Server
