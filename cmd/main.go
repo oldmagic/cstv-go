@@ -40,7 +40,7 @@ func main() {
 		IdleTimeout:  30 * time.Second,
 		ReadTimeout:  10 * time.Second,
 		WriteTimeout: 10 * time.Second,
-		Prefork:      true, // Enables multiple processes for better performance
+		Prefork:      false, // Enables multiple processes for better performance
 	})
 
 	// Middleware
