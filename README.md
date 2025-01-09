@@ -3,6 +3,18 @@
 ## Overview
 CSTV-Go is a WebSocket-based server using Fiber for handling real-time messaging.
 
+## Features
+- WebSocket support with client registration
+- Structured logging with Logrus
+- Modular design with configuration and services
+
+## Installation
+```sh
+git clone https://github.com/oldmagic/cstv-go.git
+cd cstv-go
+go mod tidy
+
+
 ## About
 This is [GOTV+](https://developer.valvesoftware.com/wiki/Counter-Strike:_Global_Offensive_Broadcast) broadcast server interface for Go(Fiber and Gin).  
   
@@ -127,14 +139,3 @@ ExecStart=/path/to/gotv_plus -addr <IP-ADDRESS>:8080 -auth gopher
 [Install]
 WantedBy=multi-user.target
 ```
-
-## Features
-- WebSocket support with client registration
-- Structured logging with Logrus
-- Modular design with configuration and services
-
-## Installation
-```sh
-git clone https://github.com/oldmagic/cstv-go.git
-cd cstv-go
-go mod tidy
