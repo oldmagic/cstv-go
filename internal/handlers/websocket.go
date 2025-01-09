@@ -3,7 +3,7 @@ package handlers
 import (
     "log"
 
-    "github.com/FlowingSPDG/gotv-plus-go/internal/services"
+    "github.com/oldmagic/cstv-go/internal/services"
     "github.com/gofiber/websocket/v2"
     "github.com/google/uuid"
 )
